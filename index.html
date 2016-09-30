@@ -24,32 +24,32 @@
   </head>
 <body>
   <div class="container">
+
   <h1>Shopping List Check Off</h1>
 
-  <div class="row">
+  <div class="row" ng-controller="ToBuyShoppingController as showBuyList">
 
     <!-- To Buy List -->
-    <div class="col-md-6" ng-controller="ToBuyShoppingController as ToBuyController">
+    <div class="col-md-6">
      <h2>To Buy:</h2>
      <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       <li ng-repeat="item in showBuyList.BuyList">Buy {{item.quantity}} {{item.name}} <button class="btn btn-default" ng-click="showBuyList.removeItem($index, item.name, item.quantity);"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+     <div class="emptyMessage" ng-if=showBuyList.BuyList.length==0>Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6" ng-controller="AlreadyBoughtShoppingController as AlreadyBoughtController">
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as showBoughtList">
      <h2>Already Bought:</h2>
      <ul>
-       <li>Bought 10 cookies</li>
+       <li ng-repeat="item in showBoughtList.BoughtList">Bought {{item.quantity}} {{item.name}}</li>
      </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
+     <div class="emptyMessage" ng-if=showBoughtList.BoughtList.length==0>Nothing bought yet.</div>
     </div>
   </div>
 </div>
 
-<script type="text/javascript" source="angular.min.js"></script>
-<script type="text/javascript" source="app.js"></script>
+<script src="angular.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
